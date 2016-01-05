@@ -22,11 +22,19 @@ const (
 	OtherExecute
 )
 
-// Given a FileInfo from the os package, get it's permission bits
-func FilePerms(fi os.FileInfo) PermissionBits {
-	perm := PermissionBits(fi.Mode().Perm())
+// Given a filepath, get it's permission bits
+func Stat(filepath string) (PermissionBits, error) {
+	fi, err := os.Stat(filepath)
+	if err != nil {
+		return 0, err
+	}
+	return FileMode(fi.Mode()), nil
+}
 
-	fm := fi.Mode()
+// Given a FileMode from the os package, get it's permission bits
+func FileMode(fm os.FileMode) PermissionBits {
+	perm := PermissionBits(fm.Perm())
+
 	if fm&os.ModeSetuid != 0 {
 		perm.SetSetuid(true)
 	}
@@ -47,17 +55,8 @@ func Chmod(filepath string, b PermissionBits) error {
 	return nil
 }
 
-// Given a filepath, get it's permission bits
-func StatPerms(filepath string) (PermissionBits, error) {
-	fi, err := os.Stat(filepath)
-	if err != nil {
-		return 0, err
-	}
-	return FilePerms(fi), nil
-}
-
 // Given an os.FileMode object, update it's permissions
-func (b PermissionBits) UpdateFileModePermissions(fm *os.FileMode) {
+func UpdateFileMode(fm *os.FileMode, b PermissionBits) {
 	// Setuid, Setgid, and Sticky bits are not in the same position in the two bitmaks
 	// So we need to set their values manually
 	if b.Setuid() {
@@ -86,13 +85,6 @@ func (b PermissionBits) UpdateFileModePermissions(fm *os.FileMode) {
 
 	// Set the permission bits
 	*fm |= os.FileMode(b)
-}
-
-func (b PermissionBits) Chmod(file *os.File) error {
-	var fm os.FileMode
-	b.UpdateFileModePermissions(&fm)
-
-	return file.Chmod(fm)
 }
 
 func (b PermissionBits) Setuid() bool {
