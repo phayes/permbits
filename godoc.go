@@ -39,3 +39,4 @@
 //  if permissions != 0777 {
 //  	return fmt.Errorf("Permissions on file are incorrect. Should be 777, got %o", permissions)
 //  }
+package permbits
