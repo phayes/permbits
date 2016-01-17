@@ -37,7 +37,7 @@ permissions.SetGroupWrite(false)
 permissions.SetOtherWrite(false)
 permbits.UpdateFileMode(&fileMode, permissions)
 
-// You can also compare octets directly
+// You can also work with octets directly
 if permissions != 0777 {
 	return fmt.Errorf("Permissions on file are incorrect. Should be 777, got %o", permissions)
 }
