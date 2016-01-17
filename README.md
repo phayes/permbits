@@ -1,4 +1,4 @@
-[![GoDoc](https://godoc.org/github.com/phayes/permbits?status.svg)](https://godoc.org/github.com/permbits/permbits)  [![Build Status](https://travis-ci.org/phayes/permbits.svg?branch=master)](https://travis-ci.org/phayes/permbits)  [![Coverage Status](https://coveralls.io/repos/phayes/permbits/badge.svg?branch=master&service=github)](https://coveralls.io/github/phayes/permbits?branch=master) 
+[![GoDoc](https://godoc.org/github.com/phayes/permbits?status.svg)](https://godoc.org/github.com/phayes/permbits)  [![Build Status](https://travis-ci.org/phayes/permbits.svg?branch=master)](https://travis-ci.org/phayes/permbits)  [![Coverage Status](https://coveralls.io/repos/phayes/permbits/badge.svg?branch=master&service=github)](https://coveralls.io/github/phayes/permbits?branch=master) 
 
 # PermBits
 
