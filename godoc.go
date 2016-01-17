@@ -1,10 +1,6 @@
-// PermBits
-//
 // Easy file permissions for golang. Easily get and set file permission bits.
 //
 // This package makes it a breeze to check and modify file permission bits in Linux, Mac, and other Unix systems.
-//
-// Example
 //
 //	permissions, err := permbits.Stat("/path/to/my/file")
 //	if err != nil {
