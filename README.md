@@ -8,7 +8,7 @@ This package makes it a breeze to check and modify file permission bits in Linux
 
 ##Example
 
-```golang
+```go
 
 func main() {
 
