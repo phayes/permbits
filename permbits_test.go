@@ -64,6 +64,17 @@ func TestFile(t *testing.T) {
 		if perms != 07777 {
 			t.Errorf("Failed to chmod file. Should be 7777, got %o", perms)
 		}
+
+		// Test Chmod directly
+		Chmod(filename, 06666)
+		Chmod(filename, 07777)
+		perms, err = Stat(filename)
+		if err != nil {
+			t.Error(err)
+		}
+		if perms != 07777 {
+			t.Errorf("Failed to chmod file directly. Should be 7777, got %o", perms)
+		}
 	}
 
 	// Clean up
@@ -318,5 +329,15 @@ func TestPermissionsDouble(t *testing.T) {
 	if allFalse.String() != "---------" {
 		t.Error("allFalse: string incorrect")
 	}
+}
 
+func TestErrors(t *testing.T) {
+	_, err := Stat("./file_does_not_exist")
+	if err == nil {
+		t.Error("Stat did not fail on missing file")
+	}
+	err = Chmod("./file_does_not_exist", 0777)
+	if err == nil {
+		t.Error("Chmod did not fail on missing file")
+	}
 }
