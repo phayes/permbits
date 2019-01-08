@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run: go get -v -t -d ./...
       - run: go test -v ./...
-      - run: gotestsum --junitfile /tmp/test-results -coverprofile=cover.out
+      - run: gotestsum --junitfile /tmp/test-results -- -coverprofile=cover.out
       - run:
           name: Send coverage reports to Code Climate
           command: |
