@@ -11,7 +11,13 @@ jobs:
       - checkout
       - run: go get -v -t -d ./...
       - run: go test -v ./...
-      - run: gotestsum --junitfile /tmp/test-results
+      - run: gotestsum --junitfile /tmp/test-results -coverprofile=cover.out
+      - run:
+          name: Send coverage reports to Code Climate
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter after-build cover.out --input-type=gocov --exit-code $?
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
