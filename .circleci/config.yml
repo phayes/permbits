@@ -4,6 +4,7 @@
 version: 2
 jobs:
   build:
+    context: codeclimate
     docker:
       - image: circleci/golang
     working_directory: /go/src/github.com/phayes/permbits
