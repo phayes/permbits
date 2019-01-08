@@ -11,6 +11,6 @@ jobs:
       - checkout
       - run: go get -v -t -d ./...
       - run: go test -v ./...
-      - run: gotestsum --junitfile unit-tests.xml
+      - run: gotestsum --junitfile /tmp/test-output.xml
       - store_test_results:
-          path: /tmp/test-results
+          path: /tmp/test-output.xml
