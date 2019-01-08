@@ -11,6 +11,9 @@ jobs:
       - checkout
       - run: go get -v -t -d ./...
       - run: go test -v ./...
-      - run: gotestsum --junitfile /tmp/test-output.xml
+      - run: gotestsum --junitfile /tmp/test-results
       - store_test_results:
-          path: /tmp/test-output.xml
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
